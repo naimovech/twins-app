@@ -1,0 +1,70 @@
+<div ng-controller="SERIESCtrl">
+    <ion-view title="Chapitres" >
+        <ion-content overflow-scroll="false" padding="false" class=" has-header" lazy-scroll>
+		
+		<ion-refresher pulling-text="Pull to refresh" on-refresh="doRefresh()"></ion-refresher>
+		
+        <ion-slide-box on-slide-changed="slideHasChanged($index)" auto-play="true" does-continue="true">
+          <ion-slide>
+            <img ng-src="img/series/banners/01.png" alt="Image" width="100%" height="auto"><!-- Change series slider 1 image -->
+          </ion-slide>
+          <ion-slide>
+            <img ng-src="img/series/banners/02.png" alt="Image" width="100%" height="auto"><!-- Change series slider 2 image -->
+          </ion-slide>
+          <ion-slide>
+            <img ng-src="img/series/banners/03.png" alt="Image" width="100%" height="auto"><!-- Change series slider 3 image -->
+          </ion-slide>
+        </ion-slide-box>
+		 <div id="mobile-contract-detail-content" >
+			<div class="row text-center">
+					<div class="col">
+					 <a class="md-raised md-button button-small  md-default-theme" ng-click="ChangeLanguage('fr')" aria-label="Add">
+						Français
+					</a>
+					</div> 
+					
+					<div class="col">
+					 <a class="md-raised md-button button-small  md-default-theme" ng-click="ChangeLanguage('en')" aria-label="Add">
+						Anglais
+					</a>
+					</div> 
+					
+					<div class="col">
+					 <a class="md-raised md-button button-small md-default-theme" ng-click="ChangeLanguage('ar')" aria-label="Add">
+						Arabe
+					</a>
+					</div>
+			</div>
+		
+			<md-input-container md-no-float>
+				<i class="ion-android-search"></i>
+				<input  id="query" ng-model="query" placeholder="Recherche ..."/>
+			</md-input-container>
+			
+		</div>
+        <ion-list>
+            <ion-item class="item-remove-animate item-thumbnail-left item-icon-right series-item" ng-repeat="chapitre in chapitres | filter:query"
+                ui-sref="churAPPiController.episodesInSeries({id:chapitre.chapitreId})" >
+                <img ion-img-cache image-lazy-src="{{chapitresAPI+chapitre.image}}" image-lazy-loader="android"  >
+              <h1 class="item-text-center item-text-wrap" style="font-size:inherit; padding-top:15px;">
+                <span ng-if="lang == 'fr'">{{chapitre.titre}}</span>
+                <span ng-if="lang == 'en'">{{chapitre.titre_en}}</span>
+                <span ng-if="lang == 'ar'">{{chapitre.titre_ar}}</span>
+                <i class="icon-arrow-right af-right"></i>
+              </h1>
+          </ion-item>
+		</ion-list>
+		
+		 
+		 <div layout="row" layout-align="center">
+			<span ng-show="!chapitres.length" id="emptyMessage" class="text-center">Aucun article trouver...</span><br />
+		</div>
+      </ion-content>
+	  
+	  
+	  
+		
+	 
+	  
+    </ion-view>
+</div>

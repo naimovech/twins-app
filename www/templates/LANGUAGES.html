@@ -1,0 +1,19 @@
+<div ng-controller="LanguagesCtrl">
+    <ion-view title="Paramètres des langues">
+        <ion-content overflow-scroll="false" padding="false" class=" has-header" lazy-scroll>
+			<div class="list" style="color:#000000;">
+			  <div class="item item-icon-left item-icon-left item-divider" >
+				<i class="icon ion-chatbubble-working"></i>
+				Langues par default
+				
+			  </div>
+			  <ion-list>
+				  <ion-radio ng-model="data.language" ng-value="fr" ng-change="serverSideChange('fr')">Français</ion-radio>
+				  <ion-radio ng-model="data.language" ng-value="en" ng-change="serverSideChange('en')">Anglais</ion-radio>
+				  <ion-radio ng-model="data.language" ng-value="ar" ng-change="serverSideChange('ar')">Arabe</ion-radio>
+			</ion-list>
+			</div>
+        </ion-content>
+	  
+    </ion-view>
+</div>

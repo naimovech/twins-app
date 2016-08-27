@@ -1,0 +1,35 @@
+<div ng-controller="episodesInSeriesCtrl">
+    <ion-view style="" title="Liste des chapitres">
+        <ion-content class="has-header" overflow-scroll="false" padding="false" lazy-scroll>
+		
+		<ion-refresher pulling-text="Pull to refresh" on-refresh="doRefresh()"></ion-refresher>
+				
+                <ion-list>
+                    <ion-item ng-repeat="chapitre in sousChapitres" class="item-thumbnail-left item-icon-right" 
+                        ui-sref="churAPPiController.episodeDetails({id:chapitre.id})" >
+                        <img image-lazy-src="{{subChapitresAPI+chapitre.slider}}" lazy-scroll-resize="true" image-lazy-loader="android"/>
+                        <h1>
+                        
+                          <h2 ng-if="lang == 'fr'">{{chapitre.titre_fr}}<i class="icon-arrow-right af-right"></i></h2>
+                          <h2 ng-if="lang == 'en'">{{chapitre.titre_en}}<i class="icon-arrow-right af-right"></i></h2>
+                          <h2 ng-if="lang == 'ar'" >{{chapitre.titre_ar}}<i class="icon-arrow-right af-right"></i></h2>
+                        </h1>
+                  </ion-item>
+				</ion-list>
+				
+				<div layout="row" layout-align="center">
+					<br />
+					<span ng-show="!sousChapitres.length" id="emptyMessage" class="text-center">Aucun article trouver...</span><br />
+				</div>
+		
+        </ion-content>
+		
+		<!--loading progress-->
+		<div id="note-list-loading-progress" class="loading-progress fade-in text-center" layout-align="center" layout="row">
+			<div  layout-align="center" layout="row">
+				<ion-spinner ng-if="!isAndroid" class="progress-circular"></ion-spinner>
+				<md-progress-circular ng-if="isAndroid" md-mode="indeterminate"></md-progress-circular> 
+		</div>
+		</div>
+    </ion-view>
+</div>

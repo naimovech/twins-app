@@ -1,0 +1,60 @@
+<div ng-controller="episodeDetailsCtrl">
+<div ng-repeat="chapitre in sousChapitresDetails">
+<ion-view title="{{chapitre.epTitle}}">
+     <ion-content  overflow-scroll="false" padding="false" class="has-header" >
+		 
+		 <ion-slide-box  on-slide-changed="slideHasChanged($index)" auto-play="true" does-continue="true" show-pager="false" >
+			<ion-slide ng-repeat="car in carosels" ng-init="updateSlider()" ng-if="$index < carosels.length" >
+			
+			<a ng-click="openModal()" ng-if="car.EPISODE_CAROSEL.length">
+			<div class="thumbnail" >
+				<img image-lazy-loader="android"  ng-src="{{car.EPISODE_CAROSEL}}"  class="portrait" lazy-scroll-resize="true"   />
+			</div>	
+			</a>	
+			
+			</ion-slide>
+         </ion-slide-box>
+         
+        
+         
+		 <video ng-show="chapitre.videoUrl.length" width="100%" controls="controls" preload="metadata" autoplay="autoplay" webkit-playsinline="webkit-playsinline" class="videoPlayer">
+		 	<source src="{{videoLink}}" type="video/mp4"/>
+		 </video>
+         
+          	<div class="dark-color item-body" style="text-align:center; text-transform:uppercase;">
+          			 <strong ng-if="lang == 'fr'">{{chapitre.titre_fr}}</strong>
+                	 <strong ng-if="lang == 'en'">{{chapitre.titre_en}}</strong>
+                     <strong ng-if="lang == 'ar'">{{chapitre.titre_ar}}</strong>
+            </div>
+            <div class="item item-body footer-bkg">
+				
+				<div class="item-text-wrap footer-bkg" style="padding-top:2%;">
+                    
+                     <span ng-if="lang == 'fr'">{{chapitre.description_fr}}</span>
+                	 <span ng-if="lang == 'en'">{{chapitre.description_en}}</span>
+                     <span ng-if="lang == 'ar'" style="text-align:right;float:right;">{{chapitre.description_ar}}</span>
+                
+				</div>
+			
+            </div>
+             
+			
+		   <script id="image-modal.html" type="text/ng-template">
+              <div class="modal image-modal transparent" ng-click="closeModal()">
+                
+                <ion-slide-box on-slide-changed="slideHasChanged($index)" auto-play="true" does-continue="true" show-pager="false">
+                  <ion-slide ng-repeat="car in carosels" ng-if="$index < carosels.length" >
+                    <img ion-img-cache image-lazy-src="{{car.EPISODE_CAROSEL}}"  image-lazy-loader="android" class="fullscreen-image" ng-if="car.EPISODE_CAROSEL.length"  style="width: 100%;  height: auto;"  />
+                    <p class="info">&nbsp;</p>
+                  </ion-slide>
+                </ion-slide-box>
+                
+              </div>
+          </script>
+		  
+		   
+			
+    </ion-content>
+</ion-view>	
+</div>
+</div>
